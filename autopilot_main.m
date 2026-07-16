@@ -90,29 +90,29 @@ D = zeros(4,2);
 
 sys_paper = ss(Apaper,Bpaper,C,D);
 
-% disp('--------------------------------')
-% disp('Descriptor Matrix E')
-% disp(E)
-% 
-% disp('--------------------------------')
-% disp('A'' Matrix')
-% disp(Aprime)
-% 
-% disp('--------------------------------')
-% disp('B'' Matrix')
-% disp(Bprime)
-% 
-% disp('--------------------------------')
-% disp('Standard A Matrix')
-% disp(Apaper)
-% 
-% disp('--------------------------------')
-% disp('Standard B Matrix')
-% disp(Bpaper)
-% 
-% disp('--------------------------------')
-% disp('Eigenvalues (Imperial)')
-% disp(eig(Apaper))
+disp('--------------------------------')
+disp('Descriptor Matrix E')
+disp(E)
+
+disp('--------------------------------')
+disp('A'' Matrix')
+disp(Aprime)
+
+disp('--------------------------------')
+disp('B'' Matrix')
+disp(Bprime)
+
+disp('--------------------------------')
+disp('Standard A Matrix')
+disp(Apaper)
+
+disp('--------------------------------')
+disp('Standard B Matrix')
+disp(Bpaper)
+
+disp('--------------------------------')
+disp('Eigenvalues (Imperial)')
+disp(eig(Apaper))
 
 %% Convert to SI Units
 
@@ -129,19 +129,19 @@ W0 = W0*ft2m;
 
 sys = ss(A,B,C,D);
 
-% disp('--------------------------------')
-% disp('Eigenvalues (SI)')
-% disp(eig(A))
+disp('--------------------------------')
+disp('Eigenvalues (SI)')
+disp(eig(A))
 
-%% Validation
+% Validation
 
-% disp('--------------------------------')
-% disp('Controllability Rank')
-% disp(rank(ctrb(A,B)))
-% 
-% disp('--------------------------------')
-% disp('DC Gain')
-% disp(dcgain(sys))
+disp('--------------------------------')
+disp('Controllability Rank')
+disp(rank(ctrb(A,B)))
+
+disp('--------------------------------')
+disp('DC Gain')
+disp(dcgain(sys))
 
 %% Initial Condition Responses
 
@@ -162,80 +162,80 @@ x0_q = [0;
 [~,~,x_theta] = initial(sys,x0_theta,t);
 [~,~,x_q]     = initial(sys,x0_q,t);
 
-% %% Response to Initial Pitch Angle Disturbance
-% 
-% figure
-% 
-% subplot(2,2,1)
-% plot(t,x_theta(:,1),'LineWidth',1.5)
-% grid on
-% title('Forward Velocity Perturbation, u')
-% xlabel('Time (s)')
-% ylabel('u (m/s)')
-% 
-% subplot(2,2,2)
-% plot(t,x_theta(:,2),'LineWidth',1.5)
-% grid on
-% title('Vertical Velocity Perturbation, w')
-% xlabel('Time (s)')
-% ylabel('w (m/s)')
-% 
-% subplot(2,2,3)
-% plot(t,rad2deg(x_theta(:,3)),'LineWidth',1.5)
-% grid on
-% title('Pitch Rate, q')
-% xlabel('Time (s)')
-% ylabel('q (deg/s)')
-% 
-% subplot(2,2,4)
-% plot(t,rad2deg(x_theta(:,4)),'LineWidth',1.5)
-% grid on
-% title('Pitch Angle, \theta')
-% xlabel('Time (s)')
-% ylabel('\theta (deg)')
-% 
-% sgtitle('Open-Loop Response to 5^\circ Initial Pitch Angle Disturbance')
-% 
-% %% Response to Initial Pitch Rate Disturbance
-% 
-% figure
-% 
-% subplot(2,2,1)
-% plot(t,x_q(:,1),'LineWidth',1.5)
-% grid on
-% title('Forward Velocity Perturbation, u')
-% xlabel('Time (s)')
-% ylabel('u (m/s)')
-% 
-% subplot(2,2,2)
-% plot(t,x_q(:,2),'LineWidth',1.5)
-% grid on
-% title('Vertical Velocity Perturbation, w')
-% xlabel('Time (s)')
-% ylabel('w (m/s)')
-% 
-% subplot(2,2,3)
-% plot(t,rad2deg(x_q(:,3)),'LineWidth',1.5)
-% grid on
-% title('Pitch Rate, q')
-% xlabel('Time (s)')
-% ylabel('q (deg/s)')
-% 
-% subplot(2,2,4)
-% plot(t,rad2deg(x_q(:,4)),'LineWidth',1.5)
-% grid on
-% title('Pitch Angle, \theta')
-% xlabel('Time (s)')
-% ylabel('\theta (deg)')
-% 
-% sgtitle('Open-Loop Response to 5^\circ/s Initial Pitch Rate Disturbance')
+%% Response to Initial Pitch Angle Disturbance
 
-%eig(A)
+figure
+
+subplot(2,2,1)
+plot(t,x_theta(:,1),'LineWidth',1.5)
+grid on
+title('Forward Velocity Perturbation, u')
+xlabel('Time (s)')
+ylabel('u (m/s)')
+
+subplot(2,2,2)
+plot(t,x_theta(:,2),'LineWidth',1.5)
+grid on
+title('Vertical Velocity Perturbation, w')
+xlabel('Time (s)')
+ylabel('w (m/s)')
+
+subplot(2,2,3)
+plot(t,rad2deg(x_theta(:,3)),'LineWidth',1.5)
+grid on
+title('Pitch Rate, q')
+xlabel('Time (s)')
+ylabel('q (deg/s)')
+
+subplot(2,2,4)
+plot(t,rad2deg(x_theta(:,4)),'LineWidth',1.5)
+grid on
+title('Pitch Angle, \theta')
+xlabel('Time (s)')
+ylabel('\theta (deg)')
+
+sgtitle('Open-Loop Response to 5^\circ Initial Pitch Angle Disturbance')
+
+%% Response to Initial Pitch Rate Disturbance
+
+figure
+
+subplot(2,2,1)
+plot(t,x_q(:,1),'LineWidth',1.5)
+grid on
+title('Forward Velocity Perturbation, u')
+xlabel('Time (s)')
+ylabel('u (m/s)')
+
+subplot(2,2,2)
+plot(t,x_q(:,2),'LineWidth',1.5)
+grid on
+title('Vertical Velocity Perturbation, w')
+xlabel('Time (s)')
+ylabel('w (m/s)')
+
+subplot(2,2,3)
+plot(t,rad2deg(x_q(:,3)),'LineWidth',1.5)
+grid on
+title('Pitch Rate, q')
+xlabel('Time (s)')
+ylabel('q (deg/s)')
+
+subplot(2,2,4)
+plot(t,rad2deg(x_q(:,4)),'LineWidth',1.5)
+grid on
+title('Pitch Angle, \theta')
+xlabel('Time (s)')
+ylabel('\theta (deg)')
+
+sgtitle('Open-Loop Response to 5^\circ/s Initial Pitch Rate Disturbance')
+
+eig(A)
 
 wn = abs(eig(A));
 zeta = -real(eig(A))./wn;
 
-% table(wn,zeta)
+table(wn,zeta)
 
 %%Adding Altitude to the system:
 
@@ -277,25 +277,25 @@ x00=[0;0;0;0;0];
 [y1,~,x1] = initial(sys5,x0_theta,t);
 [y2,~,x2] = initial(sys5,x0_q,t);
 
-% figure
-% 
-% plot(t,x1(:,5),'LineWidth',1.5)
-% grid on
-% title('Altitude Perturbation')
-% xlabel('Time (s)')
-% ylabel('h (m)')
-% 
-% sgtitle('Altitude Response to 5^\circ Initial Pitch Angle Disturbance')
-% 
-% figure
-% 
-% plot(t,x2(:,5),'LineWidth',1.5)
-% grid on
-% title('Altitude Perturbation')
-% xlabel('Time (s)')
-% ylabel('h (m)')
-% 
-% sgtitle('Altitude Response to 5^\circ/s Initial Pitch Rate Disturbance')
+figure
+
+plot(t,x1(:,5),'LineWidth',1.5)
+grid on
+title('Altitude Perturbation')
+xlabel('Time (s)')
+ylabel('h (m)')
+
+sgtitle('Altitude Response to 5^\circ Initial Pitch Angle Disturbance')
+
+figure
+
+plot(t,x2(:,5),'LineWidth',1.5)
+grid on
+title('Altitude Perturbation')
+xlabel('Time (s)')
+ylabel('h (m)')
+
+sgtitle('Altitude Response to 5^\circ/s Initial Pitch Rate Disturbance')
 
 
 %%LQR
@@ -325,8 +325,8 @@ B5_norm(:,2) = DeltaT_max*B5(:,2);
 
 
 [K3,~] = lqr(A5,B5_norm,Q3,R3);
-% disp('LQR Gain')
-% disp(K1)
+disp('LQR Gain')
+disp(K1)
 
 disp('Closed-loop Eigenvalues')
 disp(eig(A5-B5_norm*K1))
@@ -355,64 +355,64 @@ x0 = [
 
 %% Closed-Loop Responses
  
-% figure
-% 
-% subplot(3,2,1)
-% plot(t,x(:,1),'LineWidth',1.5)
-% grid on
-% title('Forward Velocity Perturbation, u')
-% xlabel('Time (s)')
-% ylabel('u (m/s)')
-% 
-% subplot(3,2,2)
-% plot(t,x(:,2),'LineWidth',1.5)
-% grid on
-% title('Vertical Velocity Perturbation, w')
-% xlabel('Time (s)')
-% ylabel('w (m/s)')
-% 
-% subplot(3,2,3)
-% plot(t,rad2deg(x(:,3)),'LineWidth',1.5)
-% grid on
-% title('Pitch Rate, q')
-% xlabel('Time (s)')
-% ylabel('q (deg/s)')
-% 
-% subplot(3,2,4)
-% plot(t,rad2deg(x(:,4)),'LineWidth',1.5)
-% grid on
-% title('Pitch Angle, \theta')
-% xlabel('Time (s)')
-% ylabel('\theta (deg)')
-% 
-% subplot(3,2,[5 6])
-% plot(t,x(:,5),'LineWidth',1.5)
-% grid on
-% title('Altitude Perturbation')
-% xlabel('Time (s)')
-% ylabel('h (m)')
-% 
-% sgtitle('Closed-Loop Response to 5^\circ Initial Pitch Disturbance')
+figure
+
+subplot(3,2,1)
+plot(t,x(:,1),'LineWidth',1.5)
+grid on
+title('Forward Velocity Perturbation, u')
+xlabel('Time (s)')
+ylabel('u (m/s)')
+
+subplot(3,2,2)
+plot(t,x(:,2),'LineWidth',1.5)
+grid on
+title('Vertical Velocity Perturbation, w')
+xlabel('Time (s)')
+ylabel('w (m/s)')
+
+subplot(3,2,3)
+plot(t,rad2deg(x(:,3)),'LineWidth',1.5)
+grid on
+title('Pitch Rate, q')
+xlabel('Time (s)')
+ylabel('q (deg/s)')
+
+subplot(3,2,4)
+plot(t,rad2deg(x(:,4)),'LineWidth',1.5)
+grid on
+title('Pitch Angle, \theta')
+xlabel('Time (s)')
+ylabel('\theta (deg)')
+
+subplot(3,2,[5 6])
+plot(t,x(:,5),'LineWidth',1.5)
+grid on
+title('Altitude Perturbation')
+xlabel('Time (s)')
+ylabel('h (m)')
+
+sgtitle('Closed-Loop Response to 5^\circ Initial Pitch Disturbance')
 
 U = -K3*x.';      % 2 × N
 
 de = rad2deg(U(1,:));   % Elevator (deg)
 dt = U(2,:);            % Normalized throttle (or thrust increment)
-% figure
-% 
-% subplot(2,1,1)
-% plot(t,de,'LineWidth',1.5)
-% grid on
-% xlabel('Time (s)')
-% ylabel('\delta_e (deg)')
-% title('Elevator Control Effort')
-% 
-% subplot(2,1,2)
-% plot(t,dt,'LineWidth',1.5)
-% grid on
-% xlabel('Time (s)')
-% ylabel('\delta_t')
-% title('Throttle Control Effort')
+figure
+
+subplot(2,1,1)
+plot(t,de,'LineWidth',1.5)
+grid on
+xlabel('Time (s)')
+ylabel('\delta_e (deg)')
+title('Elevator Control Effort')
+
+subplot(2,1,2)
+plot(t,dt,'LineWidth',1.5)
+grid on
+xlabel('Time (s)')
+ylabel('\delta_t')
+title('Throttle Control Effort')
 
 %%Noise modelling:
 % Process disturbance distribution matrix

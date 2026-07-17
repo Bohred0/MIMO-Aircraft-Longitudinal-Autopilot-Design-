@@ -145,8 +145,8 @@ disp(dcgain(sys))
 
 %% Initial Condition Responses
 
-t = 0:0.01:2000;
-
+t = 0:0.01:500;
+t2=0:0.01:100;
 % Initial pitch angle disturbance (5 deg)
 x0_theta = [0;
             0;
@@ -160,7 +160,7 @@ x0_q = [0;
         0];
 
 [~,~,x_theta] = initial(sys,x0_theta,t);
-[~,~,x_q]     = initial(sys,x0_q,t);
+[~,~,x_q]     = initial(sys,x0_q,t2);
 
 %% Response to Initial Pitch Angle Disturbance
 
@@ -201,28 +201,28 @@ sgtitle('Open-Loop Response to 5^\circ Initial Pitch Angle Disturbance')
 figure
 
 subplot(2,2,1)
-plot(t,x_q(:,1),'LineWidth',1.5)
+plot(t2,x_q(:,1),'LineWidth',1.5)
 grid on
 title('Forward Velocity Perturbation, u')
 xlabel('Time (s)')
 ylabel('u (m/s)')
 
 subplot(2,2,2)
-plot(t,x_q(:,2),'LineWidth',1.5)
+plot(t2,x_q(:,2),'LineWidth',1.5)
 grid on
 title('Vertical Velocity Perturbation, w')
 xlabel('Time (s)')
 ylabel('w (m/s)')
 
 subplot(2,2,3)
-plot(t,rad2deg(x_q(:,3)),'LineWidth',1.5)
+plot(t2,rad2deg(x_q(:,3)),'LineWidth',1.5)
 grid on
 title('Pitch Rate, q')
 xlabel('Time (s)')
 ylabel('q (deg/s)')
 
 subplot(2,2,4)
-plot(t,rad2deg(x_q(:,4)),'LineWidth',1.5)
+plot(t2,rad2deg(x_q(:,4)),'LineWidth',1.5)
 grid on
 title('Pitch Angle, \theta')
 xlabel('Time (s)')
@@ -340,9 +340,7 @@ sys_cl2 = ss(Acl2,B5_norm,C5,D5);
 sys_cl3= ss(Acl3,B5_norm,C5,D5);
 
 %% Closed-Loop Initial Condition Response
-
-t = 0:0.01:40;
-
+t=0:0.01:40
 x0 = [
     0
     0
@@ -450,4 +448,48 @@ D_kf=zeros(5,4);
 disp('Kalman Observer Poles')
 disp(E)
 
-href=81;
+Aobs = A5 - L*C_obs;
+
+sys_obs = ss(Aobs,zeros(5,1),eye(5),zeros(5,1));
+
+href=100;
+
+
+%% Open-Loop Pole-Zero Map
+
+figure
+pzmap(sys5)
+grid on
+title('Open-Loop Pole-Zero Map')
+
+%% Open-Loop vs Closed-Loop Pole Comparison
+%% Open-Loop vs Closed-Loop Pole Map
+
+figure
+
+pzmap(sys5)
+hold on
+
+pzmap(sys_cl3)
+
+grid on
+sgrid
+
+title('Open-Loop vs Closed-Loop Pole-Zero Map')
+
+legend('Open Loop','Closed Loop LQR','Location','best')
+
+h = findall(gcf,'Type','line');
+
+set(h(1),'Color','r','Marker','o')
+set(h(2),'Color','b','Marker','x')
+
+%% Kalman Observer Pole Map
+
+figure
+pzmap(sys_obs)
+
+grid on
+sgrid
+
+title('Kalman Observer Pole-Zero Map')

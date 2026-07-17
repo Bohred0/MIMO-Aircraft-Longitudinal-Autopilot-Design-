@@ -1,6 +1,11 @@
-function Ts = settling_time(t,val,tol)
+function Ts = settling_time(t, val, tol, ref)
 
-idx = find(abs(val) > tol);
+% Default reference = 0
+if nargin < 4
+    ref = 0;
+end
+
+idx = find(abs(val - ref) > tol);
 
 if isempty(idx)
 
@@ -12,7 +17,7 @@ elseif idx(end) == length(val)
 
 else
 
-    Ts = t(idx(end)+1);
+    Ts = t(idx(end) + 1);
 
 end
 
